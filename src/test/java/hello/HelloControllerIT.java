@@ -6,6 +6,8 @@ import static org.junit.Assert.assertThat;
 import java.net.URL;
 
 import com.tiza.Application;
+import com.tiza.web.dao.CertificateDao;
+import com.tiza.web.entity.Operator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +36,9 @@ public class HelloControllerIT {
     @Autowired
     private TestRestTemplate template;
 
+    @Autowired
+    private CertificateDao certificateDao;
+
     @Before
     public void setUp() throws Exception {
         this.base = new URL("http://localhost:" + port + "/");
@@ -44,4 +49,12 @@ public class HelloControllerIT {
         ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
         assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
     }
+
+
+    @Test
+    public void findOperator(){
+        Operator operator = certificateDao.findOperator("39879");
+        System.out.println(operator);
+    }
+
 }

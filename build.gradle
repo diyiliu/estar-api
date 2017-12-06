@@ -16,7 +16,10 @@ ext{
 }
 
 dependencies {
+    compile fileTree(dir:"/lib", include: "*.jar")
+
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "$springBootVersion"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: "$springBootVersion"
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: "$springBootVersion"
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: "$springBootVersion"

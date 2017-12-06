@@ -21,9 +21,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
  * Update: 2017-12-05 16:33
  */
 
+@AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
-@AutoConfigureMockMvc
 public class HelloControllerTest {
 
     @Autowired

@@ -1,6 +1,7 @@
 package hello;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,8 +40,18 @@ public class HelloControllerTest {
 
     @Test
     public void getException() throws Exception {
-        ResultActions result = mvc.perform(MockMvcRequestBuilders.get("/test").accept(MediaType.APPLICATION_JSON));
-        result.andExpect(content().string(equalTo("404")));
+         mvc.perform(MockMvcRequestBuilders.get("/test").accept(MediaType.APPLICATION_JSON))
+                 .andDo(print())
+                 .andExpect(status().isNotFound())
+                 .andExpect(content().string(equalTo("404")));
+
+    }
+
+    @Test
+    public void getStations() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/query_stations_info").accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 }

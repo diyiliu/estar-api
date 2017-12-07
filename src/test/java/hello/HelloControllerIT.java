@@ -2,6 +2,8 @@ package hello;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.net.URL;
 
@@ -15,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 /**
  * Description: HelloControllerIT
@@ -57,4 +61,9 @@ public class HelloControllerIT {
         System.out.println(operator);
     }
 
+    @Test
+    public void getStations() {
+        ResponseEntity<String> response = template.getForEntity(base + "query_stations_info", String.class);
+        System.out.println(response.getBody());
+    }
 }

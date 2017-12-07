@@ -20,14 +20,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String noHandlerFound() {
 
-        System.out.println(404);
-
         return "404";
     }
 
     @ExceptionHandler(Exception.class)
     public String defaultErrorHandler(HttpServletRequest request, Exception e) throws Exception {
-
         System.out.println(e);
 
         return "error";

@@ -1,3 +1,4 @@
+# https://docs.spring.io/spring-boot/docs/1.5.9.RELEASE/reference/htmlsingle/#common-application-properties
 # SPRING
 spring:
   profiles:
@@ -17,6 +18,10 @@ spring:
   # 资源文件不建立映射
   resources:
     add-mappings: false
+
+  # JACKSON
+  jackson:
+    property-naming-strategy: 'UPPER_CAMEL_CASE'
 
 # LOGGING
 logging:

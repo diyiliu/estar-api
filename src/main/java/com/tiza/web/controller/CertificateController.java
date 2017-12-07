@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -28,23 +27,23 @@ public class CertificateController {
 
     @PostMapping("/query_token")
     public Map queryToken(@RequestParam("OperatorID") String operatorId,
-                          @RequestParam("OperatorSecret") String operatorSecret) throws Exception{
+                          @RequestParam("OperatorSecret") String operatorSecret) throws Exception {
 
         Map respMap = new HashMap();
         respMap.put("OperatorID", operatorId);
 
         Operator operator = certificateDao.findOperator(operatorId);
-        if (operator != null && operatorSecret.equals(operator.getSecret())){
+        if (operator != null && operatorSecret.equals(operator.getSecret())) {
             respMap.put("SuccStat", 0);
             respMap.put("FailReason", 0);
 
             respMap.put("AccessToken", generateToken());
             respMap.put("TokenAvailableTime", 3600);
-        }else {
+        } else {
             respMap.put("SuccStat", 1);
-            if (operator == null){
+            if (operator == null) {
                 respMap.put("FailReason", 1);
-            }else{
+            } else {
                 respMap.put("FailReason", 2);
             }
         }

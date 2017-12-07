@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.tomcat.util.security.MD5Encoder;
 import org.junit.Test;
 import sun.misc.BASE64Encoder;
@@ -30,5 +32,24 @@ public class MainTest {
         }
 
         return buf.toString();
+    }
+
+
+    @Test
+    public void test1(){
+        double d = 0.1122233;
+
+        System.out.println(d);
+        System.out.println(0.01);
+
+        System.out.println(d + 0.01);
+    }
+
+    @Test
+    public void testDate() throws Exception{
+
+        String str = "2017-12-07 14:44:44";
+
+        System.out.println(DateUtils.parseDate(str, "yyyy-MM-dd HH:mm:ss"));
     }
 }

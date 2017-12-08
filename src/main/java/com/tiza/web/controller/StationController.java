@@ -26,15 +26,15 @@ public class StationController {
     private StationService stationService;
 
     @PostMapping("query_stations_info")
-    public Map queryStations(@RequestParam("LastQueryTime") String lastTime,
-                             @RequestParam("PageNo")String pageNo,
-                             @RequestParam("PageSize")String pageSize) throws Exception{
+    public Map queryStations(@RequestParam(value = "LastQueryTime", required = false) String lastTime,
+                             @RequestParam(value = "PageNo", required = false) String pageNo,
+                             @RequestParam(value = "PageSize", required = false) String pageSize) throws Exception {
         int page = 1;
         int limit = 10;
-        if (StringUtils.isNotEmpty(pageNo)){
+        if (StringUtils.isNotEmpty(pageNo)) {
             page = Integer.parseInt(pageNo);
         }
-        if (StringUtils.isNotEmpty(pageSize)){
+        if (StringUtils.isNotEmpty(pageSize)) {
             limit = Integer.parseInt(pageSize);
         }
 

@@ -27,7 +27,7 @@ import java.util.List;
 public class StationDao extends PageDao {
 
     @Autowired
-    public StationDao(JdbcTemplate jdbcTemplate){
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 

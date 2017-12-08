@@ -16,9 +16,12 @@ public class Equipment {
 
     private String equipmentID;
     private String manufacturerID;
+    private String manufacturerName;
     private String equipmentModel;
     private String productionDate;
     private Integer equipmentType;
+    private Double equipmentLng;
+    private Double equipmentLat;
     private Double power;
     private String equipmentName;
     private List<Connector> connectorInfos;
@@ -93,5 +96,29 @@ public class Equipment {
 
     public void setConnectorInfos(List<Connector> connectorInfos) {
         this.connectorInfos = connectorInfos;
+    }
+
+    public String getManufacturerName() {
+        return manufacturerName;
+    }
+
+    public void setManufacturerName(String manufacturerName) {
+        this.manufacturerName = manufacturerName;
+    }
+
+    public Double getEquipmentLng() {
+        return equipmentLng;
+    }
+
+    public void setEquipmentLng(Double equipmentLng) {
+        this.equipmentLng = equipmentLng;
+    }
+
+    public Double getEquipmentLat() {
+        return equipmentLat;
+    }
+
+    public void setEquipmentLat(Double equipmentLat) {
+        this.equipmentLat = equipmentLat;
     }
 }

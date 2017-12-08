@@ -39,13 +39,24 @@ public class StationDao extends PageDao {
                 "       t.equipmentownerid," +
                 "       t.district," +
                 "       t.address," +
+                "       t.stationtel," +
                 "       t.servicetel," +
                 "       t.stationtype," +
                 "       t.stationstatus," +
                 "       t.parknums," +
                 "       t.gcj02lng," +
                 "       t.gcj02lat," +
-                "       t.construction" +
+                "       t.guide," +
+                "       t.construction," +
+                "       t.matchcars," +
+                "       t.parkinfo," +
+                "       t.businesshours," +
+                "       t.electricityfee," +
+                "       t.servicefee," +
+                "       t.parkfee," +
+                "       t.payment," +
+                "       t.supportorder," +
+                "       t.remark" +
                 "  FROM bs_chargestation t";
         List param = new ArrayList();
 
@@ -68,19 +79,30 @@ public class StationDao extends PageDao {
             StationInfo stationInfo = new StationInfo();
 
             stationInfo.setId(rs.getLong("id"));
-            stationInfo.setOperationID(rs.getString("operatorid"));
+            stationInfo.setOperatorID(rs.getString("operatorid"));
             stationInfo.setStationID(rs.getString("stationid"));
             stationInfo.setStationName(rs.getString("name"));
             stationInfo.setEquipmentOwnerID(rs.getString("equipmentownerid"));
             stationInfo.setAreaCode(rs.getString("district"));
             stationInfo.setAddress(rs.getString("address"));
+            stationInfo.setStationTel(rs.getString("stationtel"));
             stationInfo.setServiceTel(rs.getString("servicetel"));
             stationInfo.setStationType(rs.getInt("stationtype"));
             stationInfo.setStationStatus(rs.getInt("stationstatus"));
             stationInfo.setParkNums(rs.getInt("parknums"));
             stationInfo.setStationLng(rs.getDouble("gcj02lng"));
             stationInfo.setStationLat(rs.getDouble("gcj02lat"));
+            stationInfo.setSiteGuide(rs.getString("guide"));
             stationInfo.setConstruction(rs.getInt("construction"));
+            stationInfo.setMatchCars(rs.getString("matchcars"));
+            stationInfo.setParkInfo(rs.getString("parkinfo"));
+            stationInfo.setBusineHours(rs.getString("businesshours"));
+            stationInfo.setElectricityFee(rs.getString("electricityfee"));
+            stationInfo.setServiceFee(rs.getString("servicefee"));
+            stationInfo.setParkFee(rs.getString("parkfee"));
+            stationInfo.setPayment(rs.getString("payment"));
+            stationInfo.setSupportOrder(rs.getInt("supportorder"));
+            stationInfo.setRemark(rs.getString("remark"));
 
             return stationInfo;
         });
@@ -90,9 +112,12 @@ public class StationDao extends PageDao {
         String sql = "SELECT id," +
                 "       equipmentid," +
                 "       manufacturerid," +
+                "       manufacturername," +
                 "       equipmentmodel," +
                 "       productiondate," +
                 "       equipmenttype," +
+                "       lng," +
+                "       lat," +
                 "       power," +
                 "       equipmentname" +
                 "  FROM bs_chargepile" +
@@ -112,9 +137,12 @@ public class StationDao extends PageDao {
             equipment.setId(rs.getLong("id"));
             equipment.setEquipmentID(rs.getString("equipmentid"));
             equipment.setManufacturerID(rs.getString("manufacturerid"));
+            equipment.setManufacturerName(rs.getString("manufacturername"));
             equipment.setEquipmentModel(rs.getString("equipmentmodel"));
             equipment.setProductionDate(DateFormatUtils.format(rs.getDate("productiondate"), "yyyy-MM-dd"));
             equipment.setEquipmentType(rs.getInt("equipmenttype"));
+            equipment.setEquipmentLng(rs.getDouble("lng"));
+            equipment.setEquipmentLat(rs.getDouble("lat"));
             equipment.setPower(rs.getDouble("power"));
             equipment.setEquipmentName(rs.getString("equipmentname"));
 
@@ -125,12 +153,14 @@ public class StationDao extends PageDao {
     public List<Connector> queryConnectors(Long equipmentId) {
         String sql = "SELECT id," +
                 "       connectorid," +
+                "       connectorName," +
                 "       connectortype," +
                 "       voltageupperlimits," +
                 "       voltagelowerlimits," +
                 "       electricitycurrent," +
                 "       nationalstandard," +
-                "       power" +
+                "       power," +
+                "       parkno" +
                 "  FROM bs_chargeconnector" +
                 " WHERE pileid = ?";
 
@@ -139,12 +169,14 @@ public class StationDao extends PageDao {
 
             connector.setId(rs.getLong("id"));
             connector.setConnectorID(rs.getString("connectorid"));
+            connector.setConnectorName(rs.getString("connectorName"));
             connector.setConnectorType(rs.getInt("connectortype"));
             connector.setVoltageUpperLimits(rs.getInt("voltageupperlimits"));
             connector.setVoltageLowerLimits(rs.getInt("voltagelowerlimits"));
             connector.setCurrent(rs.getDouble("electricitycurrent"));
             connector.setNationalStandard(rs.getInt("nationalstandard"));
             connector.setPower(rs.getDouble("power"));
+            connector.setParkNo(rs.getString("parkno"));
 
             return connector;
         });

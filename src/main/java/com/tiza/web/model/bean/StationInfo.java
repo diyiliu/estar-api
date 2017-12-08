@@ -15,14 +15,16 @@ public class StationInfo {
     @JsonIgnore
     private Long id;
 
-    private String operationID;
+    private String operatorID;
     private String stationID;
-    private String stationName;
-
     private String equipmentOwnerID;
+
+    private String stationName;
     private String countryCode = "CN";
     private String areaCode;
     private String address;
+
+    private String stationTel;
     private String serviceTel;
     private Integer stationType;
     private Integer stationStatus;
@@ -30,10 +32,19 @@ public class StationInfo {
 
     private Double stationLng;
     private Double stationLat;
+    private String siteGuide;
     private Integer construction;
     // 暂时无内容
     private List<String> pictures = new ArrayList();
-
+    private String matchCars;
+    private String parkInfo;
+    private String busineHours;
+    private String electricityFee;
+    private String serviceFee;
+    private String parkFee;
+    private String payment;
+    private Integer supportOrder;
+    private String remark;
     private List<Equipment> equipmentInfos;
 
     public Long getId() {
@@ -44,12 +55,12 @@ public class StationInfo {
         this.id = id;
     }
 
-    public String getOperationID() {
-        return operationID;
+    public String getOperatorID() {
+        return operatorID;
     }
 
-    public void setOperationID(String operationID) {
-        this.operationID = operationID;
+    public void setOperatorID(String operatorID) {
+        this.operatorID = operatorID;
     }
 
     public String getStationID() {
@@ -170,5 +181,93 @@ public class StationInfo {
 
     public void setEquipmentInfos(List<Equipment> equipmentInfos) {
         this.equipmentInfos = equipmentInfos;
+    }
+
+    public String getStationTel() {
+        return stationTel;
+    }
+
+    public void setStationTel(String stationTel) {
+        this.stationTel = stationTel;
+    }
+
+    public String getSiteGuide() {
+        return siteGuide;
+    }
+
+    public void setSiteGuide(String siteGuide) {
+        this.siteGuide = siteGuide;
+    }
+
+    public String getMatchCars() {
+        return matchCars;
+    }
+
+    public void setMatchCars(String matchCars) {
+        this.matchCars = matchCars;
+    }
+
+    public String getParkInfo() {
+        return parkInfo;
+    }
+
+    public void setParkInfo(String parkInfo) {
+        this.parkInfo = parkInfo;
+    }
+
+    public String getBusineHours() {
+        return busineHours;
+    }
+
+    public void setBusineHours(String busineHours) {
+        this.busineHours = busineHours;
+    }
+
+    public String getElectricityFee() {
+        return electricityFee;
+    }
+
+    public void setElectricityFee(String electricityFee) {
+        this.electricityFee = electricityFee;
+    }
+
+    public String getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setServiceFee(String serviceFee) {
+        this.serviceFee = serviceFee;
+    }
+
+    public String getParkFee() {
+        return parkFee;
+    }
+
+    public void setParkFee(String parkFee) {
+        this.parkFee = parkFee;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
+    public Integer getSupportOrder() {
+        return supportOrder;
+    }
+
+    public void setSupportOrder(Integer supportOrder) {
+        this.supportOrder = supportOrder;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

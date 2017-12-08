@@ -12,12 +12,14 @@ public class Connector {
     @JsonIgnore
     private Long id;
     private String connectorID;
+    private String connectorName;
     private Integer connectorType;
     private Integer voltageUpperLimits;
     private Integer voltageLowerLimits;
     private Integer nationalStandard;
     private Double current;
     private Double power;
+    private String parkNo;
 
     public Long getId() {
         return id;
@@ -81,5 +83,21 @@ public class Connector {
 
     public void setPower(Double power) {
         this.power = power;
+    }
+
+    public String getConnectorName() {
+        return connectorName;
+    }
+
+    public void setConnectorName(String connectorName) {
+        this.connectorName = connectorName;
+    }
+
+    public String getParkNo() {
+        return parkNo;
+    }
+
+    public void setParkNo(String parkNo) {
+        this.parkNo = parkNo;
     }
 }

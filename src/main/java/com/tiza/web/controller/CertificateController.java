@@ -2,7 +2,7 @@ package com.tiza.web.controller;
 
 import com.tiza.support.util.CommonUtil;
 import com.tiza.web.dao.CertificateDao;
-import com.tiza.web.entity.Operator;
+import com.tiza.web.model.bean.Operator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

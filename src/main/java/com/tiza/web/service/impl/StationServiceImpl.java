@@ -1,9 +1,9 @@
 package com.tiza.web.service.impl;
 
 import com.tiza.web.dao.StationDao;
-import com.tiza.web.entity.Connector;
-import com.tiza.web.entity.Equipment;
-import com.tiza.web.entity.StationInfo;
+import com.tiza.web.model.bean.Connector;
+import com.tiza.web.model.bean.Equipment;
+import com.tiza.web.model.bean.StationInfo;
 import com.tiza.web.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

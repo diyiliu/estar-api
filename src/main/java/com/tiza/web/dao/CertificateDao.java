@@ -1,6 +1,6 @@
 package com.tiza.web.dao;
 
-import com.tiza.web.entity.Operator;
+import com.tiza.web.model.bean.Operator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

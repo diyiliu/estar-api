@@ -1,6 +1,6 @@
 package com.tiza.web.service;
 
-import com.tiza.web.entity.StationInfo;
+import com.tiza.web.model.bean.StationInfo;
 
 import java.util.List;
 

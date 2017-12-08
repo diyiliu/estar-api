@@ -1,5 +1,6 @@
 package com.tiza.web.controller.exc;
 
+import com.tiza.web.model.RespResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -24,9 +25,11 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public String defaultErrorHandler(HttpServletRequest request, Exception e) throws Exception {
-        System.out.println(e);
+    public RespResult defaultErrorHandler(HttpServletRequest request, Exception e) throws Exception {
+        RespResult result = new RespResult();
+        result.setRet(500);
+        result.setMsg(e.getMessage());
 
-        return "error";
+        return result;
     }
 }

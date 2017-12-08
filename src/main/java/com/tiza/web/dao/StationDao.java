@@ -2,9 +2,9 @@ package com.tiza.web.dao;
 
 import com.tiza.support.util.Pagination;
 import com.tiza.support.util.PaginationHelper;
-import com.tiza.web.entity.Connector;
-import com.tiza.web.entity.Equipment;
-import com.tiza.web.entity.StationInfo;
+import com.tiza.web.model.bean.Connector;
+import com.tiza.web.model.bean.Equipment;
+import com.tiza.web.model.bean.StationInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;

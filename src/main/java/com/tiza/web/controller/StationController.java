@@ -1,7 +1,8 @@
 package com.tiza.web.controller;
 
 import com.tiza.support.util.PaginationHelper;
-import com.tiza.web.entity.StationInfo;
+import com.tiza.web.model.RespResult;
+import com.tiza.web.model.bean.StationInfo;
 import com.tiza.web.service.StationService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class StationController {
     private StationService stationService;
 
     @PostMapping("query_stations_info")
-    public Map queryStations(@RequestParam(value = "LastQueryTime", required = false) String lastTime,
-                             @RequestParam(value = "PageNo", required = false) String pageNo,
-                             @RequestParam(value = "PageSize", required = false) String pageSize) throws Exception {
+    public RespResult queryStations(@RequestParam(value = "LastQueryTime", required = false) String lastTime,
+                                    @RequestParam(value = "PageNo", required = false) String pageNo,
+                                    @RequestParam(value = "PageSize", required = false) String pageSize) throws Exception {
         int page = 1;
         int limit = 10;
         if (StringUtils.isNotEmpty(pageNo)) {
@@ -41,12 +42,17 @@ public class StationController {
         PaginationHelper.page(page, limit);
         List<StationInfo> stationInfoList = stationService.queryStation(lastTime);
 
-        Map responseMap = new HashMap();
-        responseMap.put("PageNo", page);
-        responseMap.put("PageSize", limit);
-        responseMap.put("ItemSize", PaginationHelper.getTotal());
-        responseMap.put("StationInfos", stationInfoList);
+        Map dataMap = new HashMap();
+        dataMap.put("PageNo", page);
+        dataMap.put("PageSize", limit);
+        dataMap.put("ItemSize", PaginationHelper.getTotal());
+        dataMap.put("StationInfos", stationInfoList);
 
-        return responseMap;
+        RespResult result = new RespResult();
+        result.setRet(0);
+        result.setMsg("查询充电站信息成功");
+        result.setData(dataMap);
+
+        return result;
     }
 }

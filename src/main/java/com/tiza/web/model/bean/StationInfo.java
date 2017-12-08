@@ -1,6 +1,7 @@
-package com.tiza.web.entity;
+package com.tiza.web.model.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 

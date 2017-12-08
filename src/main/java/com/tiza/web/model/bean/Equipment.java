@@ -1,4 +1,4 @@
-package com.tiza.web.entity;
+package com.tiza.web.model.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

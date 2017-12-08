@@ -1,8 +1,7 @@
 package com.tiza.web.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +30,8 @@ public class StationInfo {
     private Double stationLng;
     private Double stationLat;
     private Integer construction;
-    private List<String> pictures;
+    // 暂时无内容
+    private List<String> pictures = new ArrayList();
 
     private List<Equipment> equipmentInfos;
 

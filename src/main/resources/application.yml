@@ -22,7 +22,6 @@ spring:
   # JACKSON
   jackson:
     property-naming-strategy: 'UPPER_CAMEL_CASE'
-
 # LOGGING
 logging:
   config: 'classpath:logback.xml'

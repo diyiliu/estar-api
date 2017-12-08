@@ -1,5 +1,7 @@
 package com.tiza.web.dao;
 
+import com.tiza.support.util.Pagination;
+import com.tiza.support.util.PaginationHelper;
 import com.tiza.web.entity.Connector;
 import com.tiza.web.entity.Equipment;
 import com.tiza.web.entity.StationInfo;
@@ -22,33 +24,44 @@ import java.util.List;
  */
 
 @Repository
-public class StationDao {
+public class StationDao extends PageDao {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
+    public StationDao(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public List<StationInfo> queryStations(String lastTime) throws ParseException {
-        String sql = "SELECT id," +
-                "       operatorid," +
-                "       stationid," +
-                "       name," +
-                "       equipmentownerid," +
-                "       district," +
-                "       address," +
-                "       servicetel," +
-                "       stationtype," +
-                "       stationstatus," +
-                "       parknums," +
-                "       gcj02lng," +
-                "       gcj02lat," +
-                "       construction" +
-                "  FROM bs_chargestation";
+        String sql = "SELECT t.id," +
+                "       t.operatorid," +
+                "       t.stationid," +
+                "       t.name," +
+                "       t.equipmentownerid," +
+                "       t.district," +
+                "       t.address," +
+                "       t.servicetel," +
+                "       t.stationtype," +
+                "       t.stationstatus," +
+                "       t.parknums," +
+                "       t.gcj02lng," +
+                "       t.gcj02lat," +
+                "       t.construction" +
+                "  FROM bs_chargestation t";
         List param = new ArrayList();
 
         if (StringUtils.isNotEmpty(lastTime)) {
-            sql += "WHERE MODIFYTIME > ?";
+            sql += "  LEFT JOIN bs_chargepile e" +
+                    "    ON e.stationid = t.id" +
+                    " WHERE t.modifytime > ?" +
+                    "    OR e.modifytime > ?";
+
             param.add(DateUtils.parseDate(lastTime, "yyyy-MM-dd HH:mm:ss"));
+            param.add(DateUtils.parseDate(lastTime, "yyyy-MM-dd HH:mm:ss"));
+        }
+
+        Pagination pagination = PaginationHelper.getPagination();
+        if (pagination != null){
+            sql = buildPageSql(sql, param.toArray(), pagination);
         }
 
         return jdbcTemplate.query(sql, param.toArray(), (ResultSet rs, int rowNum) -> {
@@ -83,12 +96,13 @@ public class StationDao {
                 "       power," +
                 "       equipmentname" +
                 "  FROM bs_chargepile" +
-                " WHERE stationid = " + stationId;
+                " WHERE stationid = ?";
 
         List param = new ArrayList();
+        param.add(stationId);
 
         if (StringUtils.isNotEmpty(lastTime)) {
-            sql += "WHERE MODIFYTIME > ?";
+            sql += " AND modifytime > ?";
             param.add(DateUtils.parseDate(lastTime, "yyyy-MM-dd HH:mm:ss"));
         }
 

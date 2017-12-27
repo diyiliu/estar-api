@@ -31,7 +31,7 @@ public class StationDao extends PageDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<StationInfo> queryStations(String lastTime) throws ParseException {
+    public List<StationInfo> queryStations(String operatorId, String lastTime) throws ParseException {
         String sql = "SELECT t.id," +
                 "       t.operatorid," +
                 "       t.stationid," +
@@ -58,16 +58,19 @@ public class StationDao extends PageDao {
                 "       t.supportorder," +
                 "       t.remark" +
                 "  FROM bs_chargestation t";
+
         List param = new ArrayList();
+        param.add(operatorId);
 
         if (StringUtils.isNotEmpty(lastTime)) {
             sql += "  LEFT JOIN bs_chargepile e" +
                     "    ON e.stationid = t.id" +
-                    " WHERE t.modifytime > ?" +
-                    "    OR e.modifytime > ?";
-
+                    " WHERE t.operatorid = ?" +
+                    " AND (t.modifytime > ? OR e.modifytime > ?)";
             param.add(DateUtils.parseDate(lastTime, "yyyy-MM-dd HH:mm:ss"));
             param.add(DateUtils.parseDate(lastTime, "yyyy-MM-dd HH:mm:ss"));
+        }else {
+            sql += " WHERE t.operatorid = ?";
         }
 
         Pagination pagination = PaginationHelper.getPagination();

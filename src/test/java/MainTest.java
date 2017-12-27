@@ -52,4 +52,13 @@ public class MainTest {
 
         System.out.println(DateUtils.parseDate(str, "yyyy-MM-dd HH:mm:ss"));
     }
+
+    @Test
+    public void test2(){
+
+        String str = "Bearer 6FE9CCB972F5A4607AD851BAF0605309";
+
+        System.out.println(str.split(" ")[1]);
+
+    }
 }

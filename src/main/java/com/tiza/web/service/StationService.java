@@ -12,5 +12,5 @@ import java.util.List;
 
 public interface StationService {
 
-    List<StationInfo> queryStation(String lastTime) throws Exception;
+    List<StationInfo> queryStation(String operatorId, String lastTime) throws Exception;
 }

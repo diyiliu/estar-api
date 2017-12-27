@@ -34,4 +34,9 @@ public class PaginationHelper {
 
         return LOCAL_PAGINATION.get().getTotal();
     }
+
+    public static long getCount(){
+
+        return LOCAL_PAGINATION.get().getCount();
+    }
 }

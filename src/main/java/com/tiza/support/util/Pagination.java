@@ -58,4 +58,13 @@ public class Pagination<T> {
     public void setOrder(String order) {
         this.order = order;
     }
+
+    /**
+     * 获取页码总数
+     *
+     * @return
+     */
+    public long getCount() {
+        return total % limit == 0 ? total / limit : total / limit + 1;
+    }
 }

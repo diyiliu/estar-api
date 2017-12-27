@@ -20,6 +20,7 @@ dependencies {
 
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "$springBootVersion"
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: "$springBootVersion"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: "$springBootVersion"
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: "$springBootVersion"
 
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'

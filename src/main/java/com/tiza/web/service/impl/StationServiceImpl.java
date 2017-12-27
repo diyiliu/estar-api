@@ -23,9 +23,9 @@ public class StationServiceImpl implements StationService {
     private StationDao stationDao;
 
     @Override
-    public List<StationInfo> queryStation(String lastTime) throws Exception{
+    public List<StationInfo> queryStation(String operatorId, String lastTime) throws Exception{
 
-        List<StationInfo> stationInfoList = stationDao.queryStations(lastTime);
+        List<StationInfo> stationInfoList = stationDao.queryStations(operatorId, lastTime);
 
         for (StationInfo stationInfo: stationInfoList){
 

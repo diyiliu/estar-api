@@ -32,36 +32,17 @@ public class StationController {
     @Resource
     private RedisUtil redisUtil;
 
+    /**
+     * 查询充电站信息
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @PostMapping("query_stations_info")
     public RespResult queryStations(HttpServletRequest request) throws Exception {
         RespResult result = new RespResult();
 
-        String auth = request.getHeader("Authorization");
-        String operatorId = null;
-        String[] authArr = auth.split(" ");
-        if (authArr.length == 2 && authArr[0].equals("Bearer")) {
-
-            String token = authArr[1];
-            Token t = (Token) redisUtil.get(token);
-            // token 无效
-            if (t == null) {
-                result.setRet(4002);
-                result.setMsg("Token 无效");
-
-                return result;
-            }else {
-                // token 过期
-                long datetime = t.getDatetime();
-                if (System.currentTimeMillis() - datetime > t.getTokenAvailableTime() * 1000) {
-                    result.setRet(4002);
-                    result.setMsg("Token 过期");
-
-                    return result;
-                }
-            }
-
-            operatorId = t.getOperatorId();
-        }
+        String operatorId = (String) request.getAttribute("operatorId");
 
         String lastTime = request.getParameter("lastTime");
         String pageNo = request.getParameter("pageNo");
@@ -92,4 +73,7 @@ public class StationController {
 
         return result;
     }
+
+
+
 }

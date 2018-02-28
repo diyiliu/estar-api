@@ -24,7 +24,7 @@ import java.util.UUID;
 
 @RestController
 public class CertificateController {
-    private final static long TOKEN_AVAILABLE_TIME = 60;
+    private final static long TOKEN_AVAILABLE_TIME = 30 * 60;
 
     @Autowired
 

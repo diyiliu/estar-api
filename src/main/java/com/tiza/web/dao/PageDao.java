@@ -1,6 +1,9 @@
 package com.tiza.web.dao;
 
+import com.tiza.support.util.JacksonUtil;
 import com.tiza.support.util.Pagination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -10,6 +13,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 
 public class PageDao {
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private final String dialect = "oracle";
     protected JdbcTemplate jdbcTemplate;
 
@@ -65,5 +70,21 @@ public class PageDao {
 
         long total = jdbcTemplate.queryForObject(countSql, params, Long.class);
         pagination.setTotal(total);
+    }
+
+
+    public boolean update(String sql, Object[] values) {
+        int result = jdbcTemplate.update(sql, values);
+        if (result > 0) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean update(String sql) {
+
+        return update(sql, null);
     }
 }

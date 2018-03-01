@@ -2,6 +2,7 @@ package com.tiza.web.service.impl;
 
 import com.tiza.web.dao.StationDao;
 import com.tiza.web.model.bean.Connector;
+import com.tiza.web.model.bean.ConnectorStatus;
 import com.tiza.web.model.bean.Equipment;
 import com.tiza.web.model.bean.StationInfo;
 import com.tiza.web.service.StationService;
@@ -42,5 +43,18 @@ public class StationServiceImpl implements StationService {
         }
 
         return stationInfoList;
+    }
+
+    public boolean updateConnectorStatus(String operatorId, ConnectorStatus connectorStatus){
+        Long connectorId = stationDao.queryConnectorId(operatorId, connectorStatus.getConnectorID());
+
+        if (connectorId == null){
+
+            return  false;
+        }
+
+        connectorStatus.setId(connectorId);
+
+        return stationDao.updateConnectorStatus(connectorStatus);
     }
 }

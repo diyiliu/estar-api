@@ -1,5 +1,6 @@
 package com.tiza.web.service;
 
+import com.tiza.web.model.bean.ConnectorStatus;
 import com.tiza.web.model.bean.StationInfo;
 
 import java.util.List;
@@ -13,4 +14,6 @@ import java.util.List;
 public interface StationService {
 
     List<StationInfo> queryStation(String operatorId, String lastTime) throws Exception;
+
+    boolean updateConnectorStatus(String operatorId, ConnectorStatus connectorStatus);
 }

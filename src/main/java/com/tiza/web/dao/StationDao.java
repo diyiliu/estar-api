@@ -3,6 +3,7 @@ package com.tiza.web.dao;
 import com.tiza.support.util.Pagination;
 import com.tiza.support.util.PaginationHelper;
 import com.tiza.web.model.bean.Connector;
+import com.tiza.web.model.bean.ConnectorStatus;
 import com.tiza.web.model.bean.Equipment;
 import com.tiza.web.model.bean.StationInfo;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,7 +29,7 @@ import java.util.List;
 public class StationDao extends PageDao {
 
     @Autowired
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -69,12 +71,12 @@ public class StationDao extends PageDao {
                     " AND (t.modifytime > ? OR e.modifytime > ?)";
             param.add(DateUtils.parseDate(lastTime, "yyyy-MM-dd HH:mm:ss"));
             param.add(DateUtils.parseDate(lastTime, "yyyy-MM-dd HH:mm:ss"));
-        }else {
+        } else {
             sql += " WHERE t.operatorid = ?";
         }
 
         Pagination pagination = PaginationHelper.getPagination();
-        if (pagination != null){
+        if (pagination != null) {
             sql = buildPageSql(sql, param.toArray(), pagination);
         }
 
@@ -183,5 +185,29 @@ public class StationDao extends PageDao {
 
             return connector;
         });
+    }
+
+    public Long queryConnectorId(String operatorId, String connectorCode) {
+        String sql = "SELECT c.id" +
+                "  FROM bs_chargeconnector c" +
+                "  JOIN bs_chargepile p" +
+                "    ON c.pileid = p.id" +
+                "  JOIN bs_operator o" +
+                "    ON o.operatorid = p.manufacturerid" +
+                "   AND o.operatorid = ?" +
+                " WHERE c.connectorid = ?";
+
+        return jdbcTemplate.queryForObject(sql, new Object[]{operatorId, connectorCode}, Long.class);
+    }
+
+    public boolean updateConnectorStatus(ConnectorStatus connectorStatus) {
+        String sql = "UPDATE bs_chargeconnectorstatus t" +
+                "   SET t.status = ?, t.parkstatus = ?, t.lockstatus = ?, t.systemtime = ?" +
+                " WHERE t.id = ?";
+
+        Object[] param = new Object[]{connectorStatus.getStatus(), connectorStatus.getParkStatus(),
+                connectorStatus.getLockStatus(), new Date(), connectorStatus.getId()};
+
+        return update(sql, param);
     }
 }

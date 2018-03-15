@@ -1,3 +1,4 @@
+import com.tiza.web.model.bean.ChargeOrder;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.tomcat.util.security.MD5Encoder;
@@ -59,6 +60,14 @@ public class MainTest {
         String str = "Bearer 6FE9CCB972F5A4607AD851BAF0605309";
 
         System.out.println(str.split(" ")[1]);
+
+    }
+
+
+    @Test
+    public void test3(){
+
+
 
     }
 }

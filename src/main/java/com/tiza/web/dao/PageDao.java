@@ -1,6 +1,5 @@
 package com.tiza.web.dao;
 
-import com.tiza.support.util.JacksonUtil;
 import com.tiza.support.util.Pagination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

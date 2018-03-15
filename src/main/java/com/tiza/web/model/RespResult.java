@@ -7,9 +7,11 @@ package com.tiza.web.model;
  */
 public class RespResult {
 
-    private Integer ret;
-    private String msg;
+    private Integer ret = 0;
+    private String msg = "";
     private Object Data;
+
+    private String sig = "";
 
     public Integer getRet() {
         return ret;
@@ -33,5 +35,13 @@ public class RespResult {
 
     public void setData(Object data) {
         Data = data;
+    }
+
+    public String getSig() {
+        return sig;
+    }
+
+    public void setSig(String sig) {
+        this.sig = sig;
     }
 }
